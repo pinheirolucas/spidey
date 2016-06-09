@@ -1,20 +1,16 @@
-var express = require('express');
-var app = express();
+const express = require("express");
 
-app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/public'));
+const app = express();
 
-// views is directory for all template files
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+app.use(express.static(__dirname + "/static"));
+app.set("views", __dirname + "/views");
+app.set("view engine", "ejs");
 
-app.get('/', function(request, response) {
-  response.render('pages/index');
+app.get("/", (request, response) => {
+    response.render("pages/index");
 });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+app.listen(process.env.PORT, () => {
+    console.log("Spidey is running on port", process.env.PORT);
 });
-
-
