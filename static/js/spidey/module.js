@@ -1,6 +1,9 @@
 (function() {
     angular
-        .module("spidey", ["ngRoute"])
+        .module("spidey", [
+            "ngRoute",
+            "spidey.character"
+        ])
         .config(["$routeProvider", SpideyConfig]);
 
     function SpideyConfig($routeProvider) {
