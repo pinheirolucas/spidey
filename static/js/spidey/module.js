@@ -1,4 +1,6 @@
 (function() {
+    "use strict";
+
     angular
         .module("spidey", [
             "ngRoute",
@@ -8,12 +10,16 @@
 
     function SpideyConfig($routeProvider) {
         $routeProvider
-            .when("/home", {
-                "templateUrl": "/partials/home.html",
-                "controller": "HomeController"
+            .when("/characters/all/:offset?", {
+                "templateUrl": "/partials/all_characters.html",
+                "controller": "AllCharactersController"
+            })
+            .when("/characters/search/:term/:offset?", {
+                "templateUrl": "/partials/search_characters.html",
+                "controller": "SearchCharactersController"
             })
             .otherwise({
-                "redirectTo": "/home"
+                "redirectTo": "/characters/all"
             });
     }
 })();

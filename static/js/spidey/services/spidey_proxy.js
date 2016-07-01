@@ -15,33 +15,41 @@
 
         var _config = {
             "apis": {
-                "marvel": "http://gateway.marvel.com/v1",
+                "marvel": "http://gateway.marvel.com/v1/public",
                 "blank": ""
+            },
+            "keys": {
+                "public": "af3e71c5d09221073abf7644593af23a"
             }
         };
 
-        function HttpGet(api, url) {
+        function HttpGet(api, url, params) {
+            params.apikey = _config.keys.public;
+
             this.method = "GET";
             this.url = _config.apis[api].concat(url);
+            this.params = params;
         }
 
         self.simple_request = function(method, url, success_callback, error_callback) {
             console.log("do something");
         };
 
-        self.http_request = function(api, method, url, success_callback, error_callback) {
+        self.http_request = function(api, method, url, success_callback, error_callback, params) {
+            params = params ? params : {};
+
             var request_object = {};
 
             switch (method) {
                 case "GET":
-                    request_object = new HttpGet(api, url);
+                    request_object = new HttpGet(api, url, params);
                     break;
             }
 
             $http(request_object)
                 .then(
                     function(response) {
-                        success_callback(response.data);
+                        success_callback(response.data.data);
                     },
                     function(response) {
                         error_callback(response.data);
