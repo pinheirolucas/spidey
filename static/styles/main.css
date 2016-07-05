@@ -1,8 +1,17 @@
+body {
+    background-color: rgb(228, 228, 228);
+}
+
 .header-block {
-    height: 250px;
     background-image: url("/images/header-image.jpg");
     background-position: 47% 39%;
+    margin-bottom: 20px;
     position: relative;
+    height: 250px;
+
+    -webkit-box-shadow: 0px 6px 6px -4px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 6px 6px -4px rgba(0,0,0,0.66);
+    box-shadow: 0px 6px 6px -4px rgba(0,0,0,0.66);
 }
 
 .navbar-absolute-bottom {
@@ -11,4 +20,18 @@
 
 .navbar-transparent {
     background-color: rgba(255, 255, 255, .4);
+}
+
+.centered-content-child {
+    margin: auto;
+}
+
+.flex-centered {
+    display: flex;
+    align-items: center;
+}
+
+.pagination-nav {
+    text-align: center;
+    background-color: rgba(255, 255, 255, .6);
 }

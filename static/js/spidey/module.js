@@ -10,13 +10,15 @@
 
     function SpideyConfig($routeProvider) {
         $routeProvider
-            .when("/characters/all/:offset?", {
+            .when("/characters/all/:page?", {
                 "templateUrl": "/partials/all_characters.html",
-                "controller": "AllCharactersController"
+                "controller": "AllCharactersController",
+                "controllerAs": "all_characters"
             })
-            .when("/characters/search/:term/:offset?", {
+            .when("/characters/search/:term/:page?", {
                 "templateUrl": "/partials/search_characters.html",
-                "controller": "SearchCharactersController"
+                "controller": "SearchCharactersController",
+                "controllerAs": "search_characters"
             })
             .otherwise({
                 "redirectTo": "/characters/all"

@@ -31,10 +31,6 @@
             this.params = params;
         }
 
-        self.simple_request = function(method, url, success_callback, error_callback) {
-            console.log("do something");
-        };
-
         self.http_request = function(api, method, url, success_callback, error_callback, params) {
             params = params ? params : {};
 

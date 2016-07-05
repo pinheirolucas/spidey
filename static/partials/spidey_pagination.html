@@ -1,0 +1,26 @@
+<nav class="pagination-nav">
+    <ul class="pagination">
+        <li ng-class="{'disabled': !spidey_pagination.can_go_prev()}">
+            <a href aria-label="Previous" ng-click="spidey_pagination.go_prev()">
+                <span aria-hidden="true">
+                    «
+                </span>
+            </a>
+        </li>
+        <li
+            ng-class="{'active': spidey_pagination.is_active(page.index)}"
+            ng-repeat="page in spidey_pagination.pages track by $index"
+        >
+            <a href ng-click="spidey_pagination.go_to(page.href)">
+                {{page.index}}
+            </a>
+        </li>
+        <li ng-class="{'disabled': !spidey_pagination.can_go_next()}">
+            <a href aria-label="Next" ng-click="spidey_pagination.go_next()">
+                <span aria-hidden="true">
+                    »
+                </span>
+            </a>
+        </li>
+    </ul>
+</nav>

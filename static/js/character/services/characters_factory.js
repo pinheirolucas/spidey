@@ -14,7 +14,7 @@
         _characters_factory.get_all_heroes_with_offset = function(offset) {
             var url = "/characters";
             var params = {
-                "limit": 30,
+                "limit": 16,
                 "offset": offset,
                 "orderBy": "name"
             };
@@ -24,8 +24,6 @@
                 "GET",
                 url,
                 function(data) {
-                    console.log(data);
-
                     _characters_factory.publish("all_heroes", data);
                 },
                 function(data) {
