@@ -11,22 +11,24 @@
         var self = this;
 
         self.pages = [];
-        self.current_page = $scope.page;
+        self.current_page = parseInt($scope.page);
 
         self.can_go_prev = function() {
-            return true;
+            return (self.current_page > 1);
         };
 
         self.can_go_next = function() {
-            return true;
+            return (self.current_page < Math.ceil($scope.totalElements/$scope.elementsPerPage));
         };
 
         self.go_prev = function() {
-            console.log("going prev");
+            if (self.can_go_prev())
+                $location.url($scope.hrefMoc.replace("*", self.current_page-1));
         };
 
         self.go_next = function() {
-            console.log("going next");
+            if (self.can_go_next())
+                $location.url($scope.hrefMoc.replace("*", self.current_page+1));
         };
 
         self.go_to = function(page_href) {
@@ -38,16 +40,41 @@
         };
 
         (function init() {
-            self.pages[Math.ceil($scope.totalElements/$scope.elementsPerPage)] = {};
+            var max_per_view = 5;
+            var min = 3;
+            var max = Math.ceil($scope.totalElements/$scope.elementsPerPage);
+            var offset = 2;
 
-            self.pages = _.map(self.pages, function(__, key) {
-                return {
-                    "index": key+1,
-                    "href": $scope.hrefMoc.replace("*", key+1)
-                };
-            });
+            if (self.current_page <= min) {
+                for (var i = 1; i <= max_per_view; i++) {
+                    self.pages.push({
+                        "index": i,
+                        "href": $scope.hrefMoc.replace("*", i)
+                    });
+                }
+            } else if (self.current_page >= (max-offset)) {
+                for (var i = max; i > (max-max_per_view); i--) {
+                    self.pages.unshift({
+                        "index": i,
+                        "href": $scope.hrefMoc.replace("*", i)
+                    });
+                }
+            } else {
+                var temp = [];
+
+                for (var i = (self.current_page-offset); i <= (self.current_page+offset); i++) {
+                    temp.push({
+                        "index": i,
+                        "href": $scope.hrefMoc.replace("*", i)
+                    });
+                }
+
+                self.pages = _.sortBy(temp, function(page) {
+                    return page.index;
+                });
+
+                temp = null;
+            }
         })();
-
-        console.log($scope);
     }
 })();
