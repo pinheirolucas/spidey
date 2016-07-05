@@ -9,6 +9,8 @@
         ])
 
     function MainController($scope) {
+        var self = this;
 
+        self.href_moc = "/characters/search/*";
     }
 })();

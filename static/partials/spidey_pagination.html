@@ -11,7 +11,7 @@
             ng-class="{'active': spidey_pagination.is_active(page.index)}"
             ng-repeat="page in spidey_pagination.pages track by $index"
         >
-            <a href ng-click="spidey_pagination.go_to(page.href)">
+            <a href ng-click="spidey_pagination.go_to(page)">
                 {{page.index}}
             </a>
         </li>

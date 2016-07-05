@@ -1,4 +1,6 @@
 (function() {
+    "use strict";
+
     angular
         .module("spidey")
         .controller("SpideyPaginationController", [
@@ -31,8 +33,9 @@
                 $location.url($scope.hrefMoc.replace("*", self.current_page+1));
         };
 
-        self.go_to = function(page_href) {
-            $location.url(page_href);
+        self.go_to = function(page) {
+            if (page.index != self.current_page)
+                $location.url(page.href);
         };
 
         self.is_active = function(page_index) {
@@ -44,6 +47,17 @@
             var min = 3;
             var max = Math.ceil($scope.totalElements/$scope.elementsPerPage);
             var offset = 2;
+
+            if (max <= max_per_view) {
+                for (var i = 1; i <= max; i++) {
+                    self.pages.push({
+                        "index": i,
+                        "href": $scope.hrefMoc.replace("*", i)
+                    });
+                }
+
+                return;
+            }
 
             if (self.current_page <= min) {
                 for (var i = 1; i <= max_per_view; i++) {

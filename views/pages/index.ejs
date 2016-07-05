@@ -12,7 +12,14 @@
         <link rel="stylesheet" href="/styles/main.css">
     </head>
     <body ng-controller="MainController as main">
-        <div ng-view></div>
+        <header class="container-fluid header-block">
+            <nav class="navbar navbar-fixed-bottom navbar-absolute-bottom navbar-transparent flex-centered">
+                <div class="container">
+                    <hero-search href-moc="main.href_moc"></hero-search>
+                </div>
+            </nav>
+        </header>
+        <main class="container-fluid main-block" ng-view></main>
 
         <!-- lib -->
         <script type="text/javascript" src="/lib/js/angular.min.js"></script>
@@ -25,13 +32,16 @@
         <!-- controllers -->
         <script type="text/javascript" src="/js/spidey/controllers/main_controller.js"></script>
         <script type="text/javascript" src="/js/spidey/controllers/spidey_pagination_controller.js"></script>
+        <script type="text/javascript" src="/js/spidey/controllers/spidey_spinner_controller.js"></script>
 
         <!-- directives -->
         <script type="text/javascript" src="/js/spidey/directives/spidey_pagination.js"></script>
+        <script type="text/javascript" src="/js/spidey/directives/spidey_spinner.js"></script>
 
         <!-- services -->
         <script type="text/javascript" src="/js/spidey/services/observable_factory.js"></script>
         <script type="text/javascript" src="/js/spidey/services/spidey_proxy.js"></script>
+        <script type="text/javascript" src="/js/spidey/services/spinner_mediator.js"></script>
 
         <!-- character -->
         <script type="text/javascript" src="/js/character/module.js"></script>
@@ -39,6 +49,10 @@
         <!-- controllers -->
         <script type="text/javascript" src="/js/character/controllers/all_characters_controller.js"></script>
         <script type="text/javascript" src="/js/character/controllers/search_characters_controller.js"></script>
+        <script type="text/javascript" src="/js/character/controllers/hero_search_controller.js"></script>
+
+        <!-- directives -->
+        <script type="text/javascript" src="/js/character/directives/hero_search.js"></script>
 
         <!-- services -->
         <script type="text/javascript" src="/js/character/services/characters_factory.js"></script>

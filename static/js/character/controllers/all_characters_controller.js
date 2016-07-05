@@ -2,15 +2,16 @@
     "use strict";
 
     angular
-        .module("spidey")
+        .module("spidey.character")
         .controller("AllCharactersController", [
             "$routeParams",
             "$scope",
             "CharactersFactory",
+            "SpinnerMediator",
             HomeController
         ])
 
-    function HomeController($routeParams, $scope, CharactersFactory) {
+    function HomeController($routeParams, $scope, CharactersFactory, SpinnerMediator) {
         var self = this;
 
         self.heroes_table = {};
@@ -23,6 +24,13 @@
             return !_.isEmpty(self.heroes_table);
         };
 
+        self.show_pagination = function () {
+            if (!CharactersFactory.all_heroes.total)
+                return false;
+
+            return (CharactersFactory.all_heroes.total > self.elements_per_page);
+        };
+
         self.resolve_empty_description = function(description) {
             var empty_message = "No description provided to this character :(";
 
@@ -32,8 +40,6 @@
         CharactersFactory.get_all_heroes_with_offset(self.elements_per_page*(self.page-1));
 
         CharactersFactory.subscribe("all_heroes", function(old_value, new_value) {
-            console.log(new_value);
-
             if (!new_value.results.length)
                 return;
 
@@ -44,12 +50,11 @@
             });
 
             self.total_elements = new_value.total;
-
-            console.log(self.heroes_table);
         });
 
         $scope.$on("$destroy", function() {
             CharactersFactory.unsubscribe_all("all_heroes");
+            CharactersFactory.publish("all_heroes", {});
             self.heroes_table = null;
             self.page = null;
             self.url_moc = null;

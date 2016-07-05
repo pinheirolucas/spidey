@@ -1,0 +1,17 @@
+<form ng-submit="hero_search.go()" class="input-group col-sm-4 centered-content-child">
+    <input
+        type="text"
+        class="form-control"
+        placeholder="Find heroes..."
+        ng-model="hero_search.term"
+    >
+    <span class="input-group-btn">
+        <button
+            class="btn btn-default"
+            type="submit"
+            ng-disabled="hero_search.can_go()"
+        >
+            Go!
+        </button>
+    </span>
+</form>
