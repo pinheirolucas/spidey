@@ -15,7 +15,7 @@
 
         var _config = {
             "apis": {
-                "marvel": "http://gateway.marvel.com/v1/public",
+                "marvel": "https://gateway.marvel.com/v1/public",
                 "blank": ""
             },
             "keys": {
